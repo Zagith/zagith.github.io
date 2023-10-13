@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Duck</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            text-align: center;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            background-color: #231F20;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        #unity-canvas {
+            width: 900px;
+            height: 600px;
+            margin: 0 auto;
+        }
+        
+        .instructions {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Duck Arcade (Pre-Alpha)!</h1>
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div class="instructions">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Instructions:</h2>
+                <p>To control the duck, simply keep push left-click on the screen, arrows will appear around the mouse point.</p>
+                <p>Hover your cursor over these arrows to move the duck in the desired direction.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Objective:</h3>
+                <p>The goal is to color the tiles by passing over them or defeat enemies strategically placed on the grid.</p>
+                <p>Watch out for monsters and use your wit to outmaneuver them. Good luck and have fun!"</p>
+            </div>
+        </div>
+        <div class="row">
+            <h2>Monster Legend:</h2>
+            <p><strong>Red Chicken:</strong> Run away! It's fast and aggressive.</p>
+            <p><strong>Regular Chicken:</strong> Defeat it by moving over its tile.</p>
+            <p><strong>Turret:</strong> Run away as fast as you can to avoid its attacks.</p>
+        </div>
+    </div>
+    <script src="Build/Web.loader.js"></script>
+    <script>
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            var meta = document.createElement('meta');
+            meta.name = 'viewport';
+            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+            document.getElementsByTagName('head')[0].appendChild(meta);
+
+            var canvas = document.querySelector("#unity-canvas");
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.position = "fixed";
+
+            document.body.style.textAlign = "left";
+        }
+
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+            dataUrl: "Build/Web.data.gz",
+            frameworkUrl: "Build/Web.framework.js.gz",
+            codeUrl: "Build/Web.wasm.gz",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "BlueScreenGameStudio",
+            productName: "Duck",
+            productVersion: "1.0",
+        });
+    </script>
+</body>
+
+</html>
